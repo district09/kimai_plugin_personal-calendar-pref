@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    KimaiPlugin\PersonalCalendarPrefBundle\:
+        resource: '../../*'
+        exclude: '../../{Resources}'
+
+    KimaiPlugin\PersonalCalendarPrefBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']
