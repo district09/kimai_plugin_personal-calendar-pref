@@ -20,5 +20,8 @@
             "version": "1.0.0",
             "name": "PersonalCalendarPreference"
         }
+    },
+    "require": {
+        "ckr/arraymerger": "^2.0"
     }
 }

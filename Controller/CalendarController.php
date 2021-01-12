@@ -5,29 +5,18 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * This controller completely overwrites the core CalendarController since that
- * uses private (and not protected) methods and properties, meaning we can't
- * call them if we were to inherit from that class.
  */
 
 namespace KimaiPlugin\PersonalCalendarPrefBundle\Controller;
 
-use App\Calendar\DragAndDropSource;
-use App\Calendar\Google;
-use App\Calendar\GoogleSource;
-use App\Calendar\RecentActivitiesSource;
-use App\Calendar\TimesheetEntry;
 use App\Configuration\SystemConfiguration;
-use App\Controller\AbstractController;
-use App\Event\CalendarDragAndDropSourceEvent;
-use App\Event\CalendarGoogleSourceEvent;
+use App\Controller\CalendarController as CallendarControllerBase;
 use App\Repository\TimesheetRepository;
 use App\Timesheet\TrackingModeService;
-use App\Utils\Color;
+use Ckr\Util\ArrayMerger;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Controller used to display calendars.
@@ -35,17 +24,12 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  * @Route(path="/calendar")
  * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
  */
-class CalendarController extends AbstractController
+class CalendarController extends CallendarControllerBase
 {
     /**
-     * @var EventDispatcherInterface
+     * @var array
      */
-    private $dispatcher;
-
-    public function __construct(EventDispatcherInterface $dispatcher)
-    {
-        $this->dispatcher = $dispatcher;
-    }
+    protected $userPreferenceOverrides = [];
 
     /**
      * @Route(path="/", name="calendar", methods={"GET"})
@@ -53,99 +37,22 @@ class CalendarController extends AbstractController
     public function userCalendar(SystemConfiguration $configuration, TrackingModeService $service, TimesheetRepository $repository)
     {
         $user = $this->getUser();
-        $mode = $service->getActiveMode();
-        $factory = $this->getDateTimeFactory();
-        $defaultStart = $factory->createDateTime($configuration->getTimesheetDefaultBeginTime());
         $timeframeBegin = $user->getPreferenceValue('calendar.visibleHours.begin', $configuration->getCalendarTimeframeBegin());
         $timeframeEnd = $user->getPreferenceValue('calendar.visibleHours.end', $configuration->getCalendarTimeframeEnd());
-
-        $config = [
-            'dayLimit' => $configuration->getCalendarDayLimit(),
-            'showWeekNumbers' => $configuration->isCalendarShowWeekNumbers(),
-            'showWeekends' => $configuration->isCalendarShowWeekends(),
-            'businessDays' => $configuration->getCalendarBusinessDays(),
-            'businessTimeBegin' => $configuration->getCalendarBusinessTimeBegin(),
-            'businessTimeEnd' => $configuration->getCalendarBusinessTimeEnd(),
-            'slotDuration' => $configuration->getCalendarSlotDuration(),
-            'timeframeBegin' => $timeframeBegin,
-            'timeframeEnd' => $timeframeEnd,
+        $this->userPreferenceOverrides = [
+            'config' => [
+                'timeframeBegin' => $timeframeBegin,
+                'timeframeEnd' => $timeframeEnd,
+            ]
         ];
 
-        $isPunchMode = !$mode->canEditDuration() && !$mode->canEditBegin() && !$mode->canEditEnd();
-        $dragAndDrop = [];
-
-        if ($mode->canEditBegin()) {
-            $dragAndDrop = $this->getDragAndDropResources($repository);
-        }
-
-        return $this->render('calendar/user.html.twig', [
-            'config' => $config,
-            'dragAndDrop' => $dragAndDrop,
-            'google' => $this->getGoogleSources($configuration),
-            'now' => $factory->createDateTime(),
-            'defaultStartTime' => $defaultStart->format('h:i:s'),
-            'is_punch_mode' => $isPunchMode,
-            'can_edit_begin' => $mode->canEditBegin(),
-            'can_edit_end' => $mode->canEditBegin(),
-            'can_edit_duration' => $mode->canEditDuration(),
-        ]);
+        return parent::userCalendar($configuration, $service, $repository);
     }
 
-    /**
-     * @return DragAndDropSource[]
-     */
-    private function getDragAndDropResources(TimesheetRepository $repository): array
+    protected function render(string $view, array $parameters = array(), Response $response = null): Response
     {
-        $sources = [];
+        $parameters = (new ArrayMerger($parameters, $this->userPreferenceOverrides))->mergeData();
 
-        try {
-            $data = $repository->getRecentActivities(
-                $this->getUser(),
-                $this->getDateTimeFactory()->createDateTime('-1 year'),
-                10
-            );
-
-            $entries = [];
-            $colorHelper = new Color();
-            foreach ($data as $timesheet) {
-                $entries[] = new TimesheetEntry($timesheet, $colorHelper->getTimesheetColor($timesheet));
-            }
-
-            $sources[] = new RecentActivitiesSource($entries);
-        } catch (\Exception $ex) {
-            $this->logException($ex);
-        }
-
-        $event = new CalendarDragAndDropSourceEvent($this->getUser());
-        $this->dispatcher->dispatch($event);
-
-        foreach ($event->getSources() as $source) {
-            $sources[] = $source;
-        }
-
-        return $sources;
-    }
-
-    private function getGoogleSources(SystemConfiguration $configuration): ?Google
-    {
-        $apiKey = $configuration->getCalendarGoogleApiKey();
-        if ($apiKey === null) {
-            return null;
-        }
-
-        $sources = [];
-
-        foreach ($configuration->getCalendarGoogleSources() as $name => $config) {
-            $sources[] = new GoogleSource($name, $config['id'], $config['color']);
-        }
-
-        $event = new CalendarGoogleSourceEvent($this->getUser());
-        $this->dispatcher->dispatch($event);
-
-        foreach ($event->getSources() as $source) {
-            $sources[] = $source;
-        }
-
-        return new Google($apiKey, $sources);
+        return parent::render($view, $parameters, $response);
     }
 }
