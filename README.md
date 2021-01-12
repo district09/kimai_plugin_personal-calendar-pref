@@ -8,7 +8,7 @@ the calendar display in their personal preferences.
 First clone it to your Kimai installation `plugins` directory:
 ```
 cd /kimai/var/plugins/
-git clone https://github.com/digipolisgent/kimai_plugin_personal-calendar-pref.git
+git clone https://github.com/digipolisgent/kimai_plugin_personal-calendar-pref.git PersonalCalendarPrefBundle
 ```
 
 And then rebuild the cache:
