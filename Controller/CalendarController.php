@@ -34,7 +34,7 @@ class CalendarController extends CallendarControllerBase
     /**
      * @Route(path="/", name="calendar", methods={"GET"})
      */
-    public function userCalendar(SystemConfiguration $configuration, TrackingModeService $service, TimesheetRepository $repository)
+    public function userCalendar(SystemConfiguration $configuration, TrackingModeService $service)
     {
         $user = $this->getUser();
         $timeframeBegin = $user->getPreferenceValue('calendar.visibleHours.begin', $configuration->getCalendarTimeframeBegin());

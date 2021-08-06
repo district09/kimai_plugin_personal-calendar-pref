@@ -16,7 +16,7 @@
     ],
     "extra": {
         "kimai": {
-            "require": "1.10",
+            "require": "1.15",
             "version": "1.0.1",
             "name": "PersonalCalendarPreference"
         },
