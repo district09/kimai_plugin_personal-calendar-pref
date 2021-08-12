@@ -28,7 +28,7 @@ class CalendarSubscriber implements EventSubscriberInterface
 
     public function alterCalendarConfiguration(CalendarConfigurationEvent $event)
     {
-        if (null === $this->getUser()) {
+        if (null === ($user = $this->getUser())) {
             return;
         }
 
@@ -38,6 +38,7 @@ class CalendarSubscriber implements EventSubscriberInterface
           'timeframeEnd' => $user->getPreferenceValue('calendar.visibleHours.end', $configuration['timeframeEnd']),
         ];
 
+        $event->setConfiguration($overriddenConfig);
     }
 
     protected function getUser(): ?User
