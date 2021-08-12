@@ -38,6 +38,7 @@ class CalendarSubscriber implements EventSubscriberInterface
           'timeframeEnd' => $user->getPreferenceValue('calendar.visibleHours.end', $configuration['timeframeEnd']),
         ];
 
+        $event->setConfiguration($overriddenConfig);
     }
 
     protected function getUser(): ?User
