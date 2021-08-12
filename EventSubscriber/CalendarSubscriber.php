@@ -28,7 +28,7 @@ class CalendarSubscriber implements EventSubscriberInterface
 
     public function alterCalendarConfiguration(CalendarConfigurationEvent $event)
     {
-        if (null === $this->getUser()) {
+        if (null === ($user = $this->getUser())) {
             return;
         }
 
