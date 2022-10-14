@@ -16,13 +16,10 @@
     ],
     "extra": {
         "kimai": {
-            "require": "1.15",
-            "version": "1.0.1",
+            "require": "1.26",
+            "version": "1.0.2",
             "name": "PersonalCalendarPreference"
         },
         "installer-name": "PersonalCalendarPrefBundle"
-    },
-    "require": {
-        "ckr/arraymerger": "^2.0"
     }
 }
