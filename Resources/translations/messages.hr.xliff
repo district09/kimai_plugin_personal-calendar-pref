@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="hr" datatype="plaintext" original="none">
+        <body>
+            <trans-unit id="Personal-Calendar-Preferences">
+                <source>Personal-Calendar-Preferences</source>
+                <target>Postavke osobnog kalendara</target>
+            </trans-unit>
+            <trans-unit id="calendar.visibleHours.begin">
+                <source>calendar.visibleHours.begin</source>
+                <target>Početak vidljivog vremenskog razdoblja</target>
+            </trans-unit>
+            <trans-unit id="calendar.visibleHours.end">
+                <source>calendar.visibleHours.end</source>
+                <target>Kraj vidljivog vremenskog razdoblja</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
