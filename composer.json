@@ -17,7 +17,7 @@
     "extra": {
         "kimai": {
             "require": "1.26",
-            "version": "1.0.2",
+            "version": "1.2.3",
             "name": "PersonalCalendarPreference"
         },
         "installer-name": "PersonalCalendarPrefBundle"
