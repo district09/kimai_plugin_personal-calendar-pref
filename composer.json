@@ -1,25 +1,25 @@
 {
     "name": "digipolisgent/personal-calendar-pref-plugin",
     "description": "A Kimai 2 plugin, which allows users to set a customized start and end time for the calendar display in their personal preferences.",
-    "homepage": "https://github.com/digipolisgent/kimai_plugin_personal-calendar-pref",
+    "license": "MIT",
     "type": "kimai-plugin",
+    "version": "2.0.0",
     "keywords": [
         "kimai",
         "kimai-plugin"
     ],
-    "license": "MIT",
     "authors": [
         {
             "name": "Jelle Sebreghts",
             "email": "Jelle.Sebreghts@district09.gent"
         }
     ],
+    "homepage": "https://github.com/digipolisgent/kimai_plugin_personal-calendar-pref",
     "extra": {
+        "installer-name": "PersonalCalendarPrefBundle",
         "kimai": {
-            "require": "1.26",
-            "version": "1.2.3",
-            "name": "PersonalCalendarPreference"
-        },
-        "installer-name": "PersonalCalendarPrefBundle"
+            "name": "PersonalCalendarPreference",
+            "require": "2000"
+        }
     }
 }

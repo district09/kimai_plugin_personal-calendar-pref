@@ -40,7 +40,7 @@ class UserProfileSubscriber implements EventSubscriberInterface
         // otherwise it will be overwritten with the users choice, stored in the database.
         $event->addPreference(
             (new UserPreference())
-                ->setName('calendar.visibleHours.begin')
+                ->setName('calendar_visibleHours_begin')
                 ->setValue($this->configuration->getCalendarTimeframeBegin())
                 ->setType(DayTimeType::class)
                 ->setConstraints([new NotBlank(), new TimeFormat()]),
@@ -48,7 +48,7 @@ class UserProfileSubscriber implements EventSubscriberInterface
 
         $event->addPreference(
             (new UserPreference())
-                ->setName('calendar.visibleHours.end')
+                ->setName('calendar_visibleHours_end')
                 ->setValue($this->configuration->getCalendarTimeframeEnd())
                 ->setType(DayTimeType::class)
                 ->setConstraints([new NotBlank(), new TimeFormat()]),

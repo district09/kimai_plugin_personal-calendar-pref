@@ -6,4 +6,4 @@ services:
 
     KimaiPlugin\PersonalCalendarPrefBundle\:
         resource: '../../*'
-        exclude: '../../{Resources}'
+        exclude: '../../Resources'

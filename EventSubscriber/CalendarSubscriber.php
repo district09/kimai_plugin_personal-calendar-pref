@@ -34,8 +34,8 @@ class CalendarSubscriber implements EventSubscriberInterface
 
         $configuration = $event->getConfiguration();
         $overriddenConfig = [
-          'timeframeBegin' => $user->getPreferenceValue('calendar.visibleHours.begin', $configuration['timeframeBegin']),
-          'timeframeEnd' => $user->getPreferenceValue('calendar.visibleHours.end', $configuration['timeframeEnd']),
+          'timeframeBegin' => $user->getPreferenceValue('calendar_visibleHours_begin', $configuration['timeframeBegin']),
+          'timeframeEnd' => $user->getPreferenceValue('calendar_visibleHours_end', $configuration['timeframeEnd']),
         ];
 
         $event->setConfiguration($overriddenConfig);
