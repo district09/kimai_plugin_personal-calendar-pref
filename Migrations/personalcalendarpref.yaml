@@ -1,0 +1,13 @@
+# --------------------------------------------------------------------------------------------------
+# Generate a new migration with:
+# bin/console doctrine:migrations:diff --em=default --configuration=var/plugins/AuditTrailBundle/Migrations/audittrail.yaml
+#
+# Execute all migrations with:
+# bin/console kimai:bundle:audittrail:install
+# bin/console doctrine:migrations:migrate --em=default --configuration=var/plugins/AuditTrailBundle/Migrations/audittrail.yaml
+# --------------------------------------------------------------------------------------------------
+
+table_storage:
+    table_name: 'bundle_migration_personalcalendarpref'
+migrations_paths:
+    'KimaiPlugin\PersonalCalendarPrefBundle': 'var/plugins/PersonalCalendarPrefBundle/Migrations'
