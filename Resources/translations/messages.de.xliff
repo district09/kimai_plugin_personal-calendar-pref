@@ -7,12 +7,12 @@
                 <source>Personal-Calendar-Preferences</source>
                 <target>Persönliche Kalendereinstellungen</target>
             </trans-unit>
-            <trans-unit id="calendar.visibleHours.begin">
-                <source>calendar.visibleHours.begin</source>
+            <trans-unit id="calendar_visibleHours_begin">
+                <source>calendar_visibleHours_begin</source>
                 <target>Start des sichtbaren Zeitbereichs</target>
             </trans-unit>
-            <trans-unit id="calendar.visibleHours.end">
-                <source>calendar.visibleHours.end</source>
+            <trans-unit id="calendar_visibleHours_end">
+                <source>calendar_visibleHours_end</source>
                 <target>Ende des sichtbaren Zeitbereichs</target>
             </trans-unit>
         </body>

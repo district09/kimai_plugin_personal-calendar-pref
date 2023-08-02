@@ -6,12 +6,12 @@
                 <source>Personal-Calendar-Preferences</source>
                 <target>Postavke osobnog kalendara</target>
             </trans-unit>
-            <trans-unit id="calendar.visibleHours.begin">
-                <source>calendar.visibleHours.begin</source>
+            <trans-unit id="calendar_visibleHours_begin">
+                <source>calendar_visibleHours_begin</source>
                 <target>Početak vidljivog vremenskog razdoblja</target>
             </trans-unit>
-            <trans-unit id="calendar.visibleHours.end">
-                <source>calendar.visibleHours.end</source>
+            <trans-unit id="calendar_visibleHours_end">
+                <source>calendar_visibleHours_end</source>
                 <target>Kraj vidljivog vremenskog razdoblja</target>
             </trans-unit>
         </body>
