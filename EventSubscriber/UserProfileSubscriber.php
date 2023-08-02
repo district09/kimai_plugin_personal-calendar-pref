@@ -25,7 +25,7 @@ class UserProfileSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            UserPreferenceEvent::CONFIGURE => ['loadUserPreferences', 200]
+            UserPreferenceEvent::class => ['loadUserPreferences', 200]
         ];
     }
 
@@ -39,16 +39,14 @@ class UserProfileSubscriber implements EventSubscriberInterface
         // The value is the default as long as the user has not yet updated his preferences,
         // otherwise it will be overwritten with the users choice, stored in the database.
         $event->addPreference(
-            (new UserPreference())
-                ->setName('calendar_visibleHours_begin')
+            (new UserPreference('calendar_visibleHours_begin'))
                 ->setValue($this->configuration->getCalendarTimeframeBegin())
                 ->setType(DayTimeType::class)
                 ->setConstraints([new NotBlank(), new TimeFormat()]),
         );
 
         $event->addPreference(
-            (new UserPreference())
-                ->setName('calendar_visibleHours_end')
+            (new UserPreference('calendar_visibleHours_end'))
                 ->setValue($this->configuration->getCalendarTimeframeEnd())
                 ->setType(DayTimeType::class)
                 ->setConstraints([new NotBlank(), new TimeFormat()]),
