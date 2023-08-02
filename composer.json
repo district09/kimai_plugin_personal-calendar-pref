@@ -19,7 +19,7 @@
         "installer-name": "PersonalCalendarPrefBundle",
         "kimai": {
             "name": "PersonalCalendarPreference",
-            "require": "2000"
+            "require": 20000
         }
     }
 }
