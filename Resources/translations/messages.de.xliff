@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" target-language="en" datatype="plaintext" original="none">
+<xliff version="1.2"
+    xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="de" datatype="plaintext" original="none">
         <body>
             <trans-unit id="Personal-Calendar-Preferences">
                 <source>Personal-Calendar-Preferences</source>
-                <target>Personal Calendar Preferences</target>
+                <target>Persönliche Kalendereinstellungen</target>
             </trans-unit>
             <trans-unit id="calendar_visibleHours_begin">
                 <source>calendar_visibleHours_begin</source>
-                <target>Begin van het zichtbare tijdsbereik voor de kalender</target>
+                <target>Start des sichtbaren Zeitbereichs</target>
             </trans-unit>
             <trans-unit id="calendar_visibleHours_end">
                 <source>calendar_visibleHours_end</source>
-                <target>Einde van het zichtbare tijdsbereik voor de kalender</target>
+                <target>Ende des sichtbaren Zeitbereichs</target>
             </trans-unit>
         </body>
     </file>

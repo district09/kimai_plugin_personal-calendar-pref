@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class PersonalCalendarPrefExtension extends Extension implements PrependExtensionInterface
 {
     /**
-     * @param array $configs
+     * @param array<string, mixed> $configs
      * @param ContainerBuilder $container
      * @throws \Exception
      */
